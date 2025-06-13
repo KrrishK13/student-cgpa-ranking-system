@@ -41,5 +41,6 @@ student-cgpa-ranking-system/
 ## 🗓️ Daily GitHub Posting Progress
 
 - ✅ Day 1: Repo initialized and README created
+- ✅ Day 2: Added project design and menu plan
 
 ---
