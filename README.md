@@ -42,5 +42,7 @@ student-cgpa-ranking-system/
 
 - ✅ Day 1: Repo initialized and README created
 - ✅ Day 2: Added project design and menu plan
+- ✅ Day 3: Added add_student() function with CGPA and duplicate check
+
 
 ---
