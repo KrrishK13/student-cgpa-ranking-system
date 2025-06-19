@@ -45,5 +45,6 @@ student-cgpa-ranking-system/
 - ✅ Day 3: Added add_student() function with CGPA and duplicate check
 - ✅ Day 4: Added update_student() and delete_student() functionality
 - ✅ Day 5: Added sort_students() function using Selection Sort and Merge Sort, Added view_students() to display sorted records
+- ✅ Day 6: Added search_student() using Linear (by name) and Binary (by roll) Search
 
 ---
