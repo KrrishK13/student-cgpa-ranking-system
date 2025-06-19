@@ -147,6 +147,59 @@ def sort_students():
     else:
         print("❌ Invalid choice.")
 
+def search_by_name(name):
+    results = []
+    for student in students:
+        if student['name'].lower() == name.lower():
+            results.append(student)
+
+    return results
+
+def binary_search_by_roll(roll):
+    sorted_students = sorted(students, key=lambda s: s['roll'])
+    left = 0
+    right = len(sorted_students) - 1
+
+    while left <= right:
+        mid = (left + right) // 2
+        if sorted_students[mid]['roll'] == roll:
+            return sorted_students[mid]
+        elif sorted_students[mid]['roll'] < roll:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return None
+
+def search_student():
+    print("\n🔍 Search Student:")
+    print("1. Search by Name (Linear Search)")
+    print("2. Search by Roll Number (Binary Search)")
+    
+    choice = input("Enter choice (1 or 2): ")
+
+    if choice == '1':
+        name = input("Enter name to search: ")
+        results = search_by_name(name)
+        if results:
+            print("\nFound student(s):")
+            for s in results:
+                print(f"Roll: {s['roll']}, Name: {s['name']}, CGPA: {s['cgpa']}")
+        else:
+            print("❌ No student found with that name.")
+    
+    elif choice == '2':
+        roll = input("Enter roll number to search: ")
+        result = binary_search_by_roll(roll)
+        if result:
+            print(f"\nFound: Roll: {result['roll']}, Name: {result['name']}, CGPA: {result['cgpa']}")
+        else:
+            print("❌ No student found with that roll number.")
+    
+    else:
+        print("❌ Invalid choice.")
+
+
+
 def show_menu():
     print("\n📚 Student CGPA Ranking System")
     print("1. Add Student")
@@ -154,7 +207,9 @@ def show_menu():
     print("3. Delete Student")
     print("4. Sort Students by CGPA")
     print("5. View All Students")
-    print("5. Exit")
+    print("6. Search Student")
+    print("7. Exit")
+
 
 def main():
     while True:
@@ -172,6 +227,8 @@ def main():
         elif choice == '5':
             view_students()
         elif choice == '6':
+            search_student()
+        elif choice == '7':
             print("Goodbye!")
             break
 
