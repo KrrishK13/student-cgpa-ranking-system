@@ -46,5 +46,6 @@ student-cgpa-ranking-system/
 - ✅ Day 4: Added update_student() and delete_student() functionality
 - ✅ Day 5: Added sort_students() function using Selection Sort and Merge Sort, Added view_students() to display sorted records
 - ✅ Day 6: Added search_student() using Linear (by name) and Binary (by roll) Search
+- ✅ Day 7: Assigned Gold, Silver, Bronze medals to top 3 students based on CGPA
 
 ---
