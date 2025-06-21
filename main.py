@@ -23,7 +23,8 @@ def add_student():
     student = {
         "roll": roll,
         "name": name,
-        "cgpa": cgpa
+        "cgpa": cgpa,
+        "medal": None 
     }
 
     students.append(student)
@@ -119,10 +120,12 @@ def view_students():
         return
 
     print("\n📋 List of Students:")
-    print("{:<10} {:<20} {:<5}".format("Roll", "Name", "CGPA"))
-    print("-" * 40)
+    print("{:<10} {:<20} {:<5} {:<10}".format("Roll", "Name", "CGPA", "Medal"))
+    print("-" * 50)
     for s in students:
-        print("{:<10} {:<20} {:<5}".format(s['roll'], s['name'], s['cgpa']))
+        medal_display = s['medal'] if s['medal'] else "-"
+        print("{:<10} {:<20} {:<5} {:<10}".format(s['roll'], s['name'], s['cgpa'], medal_display))
+
 
 def sort_students():
     if not students:
@@ -198,6 +201,24 @@ def search_student():
     else:
         print("❌ Invalid choice.")
 
+def assign_medals():
+    if len(students) < 3:
+        print("❌ Not enough students to assign medals (need at least 3).")
+        return
+
+    # First, sort students by CGPA in descending order
+    sorted_students = sorted(students, key=lambda s: s['cgpa'], reverse=True)
+
+    # Reset medals
+    for student in students:
+        student['medal'] = None
+
+    # Assign medals to top 3
+    sorted_students[0]['medal'] = '🥇 Gold'
+    sorted_students[1]['medal'] = '🥈 Silver'
+    sorted_students[2]['medal'] = '🥉 Bronze'
+
+    print("🏅 Medals assigned to top 3 students based on CGPA!")
 
 
 def show_menu():
@@ -208,7 +229,8 @@ def show_menu():
     print("4. Sort Students by CGPA")
     print("5. View All Students")
     print("6. Search Student")
-    print("7. Exit")
+    print("7. Assign Medals")
+    print("8. Exit")
 
 
 def main():
@@ -229,8 +251,11 @@ def main():
         elif choice == '6':
             search_student()
         elif choice == '7':
+            assign_medals()
+        elif choice == '8':
             print("Goodbye!")
             break
+
 
         else:
             print("Invalid choice. Please try again.")
