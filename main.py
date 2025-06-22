@@ -1,7 +1,7 @@
 students = []
 
 def add_student():
-    roll = input("Enter Roll Number: ")
+    roll = input("Enter Roll Number: ").strip()
 
     # Check if roll number already exists
     for student in students:
@@ -9,7 +9,10 @@ def add_student():
             print("❌ Roll number already exists!")
             return
 
-    name = input("Enter Name: ")
+    name = input("Enter Name: ").strip()
+    if not name:
+        print("❌ Name cannot be empty.")
+        return
 
     try:
         cgpa = float(input("Enter CGPA (0 - 10): "))
@@ -24,26 +27,39 @@ def add_student():
         "roll": roll,
         "name": name,
         "cgpa": cgpa,
-        "medal": None 
+        "medal": None
     }
 
     students.append(student)
     print("✅ Student added successfully!")
+    print("-" * 50)
+
+
 
 def update_student():
-    roll = input("Enter Roll Number of the student to update: ")
-    
+    roll = input("Enter Roll Number of the student to update: ").strip()
+    if not roll:
+        print("❌ Roll Number cannot be empty.")
+        return
+
     for student in students:
         if student['roll'] == roll:
             print(f"Current Name: {student['name']}")
             print(f"Current CGPA: {student['cgpa']}")
-            student['name'] = input("Enter New Name: ")
-            
+
+            name = input("Enter New Name: ").strip()
+            if not name:
+                print("❌ Name cannot be empty.")
+                return
+            student['name'] = name
+
             try:
                 cgpa = float(input("Enter New CGPA (0 - 10): "))
                 if 0 <= cgpa <= 10:
                     student['cgpa'] = cgpa
                     print("✅ Student updated successfully!")
+                    print("-" * 50)
+
                 else:
                     print("❌ CGPA must be between 0 and 10.")
             except ValueError:
@@ -52,16 +68,22 @@ def update_student():
 
     print("❌ Student with that Roll Number not found.")
 
+
 def delete_student():
-    roll = input("Enter Roll Number of the student to delete: ")
-    
+    roll = input("Enter Roll Number of the student to delete: ").strip()
+    if not roll:
+        print("❌ Roll Number cannot be empty.")
+        return
+
     for student in students:
         if student['roll'] == roll:
             students.remove(student)
             print("✅ Student deleted successfully!")
+            print("-" * 50) 
             return
 
     print("❌ Student with that Roll Number not found.")
+
 
 def selection_sort():
     n = len(students)
@@ -72,6 +94,8 @@ def selection_sort():
                 max_idx = j
         students[i], students[max_idx] = students[max_idx], students[i]
     print("✅ Students sorted by CGPA using Selection Sort.")
+    view_students()
+    print("-" * 50)
 
 def merge_sort(student_list):
     if len(student_list) <= 1:
@@ -111,6 +135,8 @@ def sort_students():
         students.clear()
         students.extend(sorted_list)
         print("✅ Students sorted by CGPA using Merge Sort.")
+        view_students()
+        print("-" * 50)
     else:
         print("❌ Invalid choice.")
 
@@ -120,11 +146,15 @@ def view_students():
         return
 
     print("\n📋 List of Students:")
+    print("-" * 50)
     print("{:<10} {:<20} {:<5} {:<10}".format("Roll", "Name", "CGPA", "Medal"))
     print("-" * 50)
+
     for s in students:
         medal_display = s['medal'] if s['medal'] else "-"
         print("{:<10} {:<20} {:<5} {:<10}".format(s['roll'], s['name'], s['cgpa'], medal_display))
+    print("-" * 50)
+
 
 
 def sort_students():
@@ -185,6 +215,7 @@ def search_student():
         results = search_by_name(name)
         if results:
             print("\nFound student(s):")
+            print("-" * 50)
             for s in results:
                 print(f"Roll: {s['roll']}, Name: {s['name']}, CGPA: {s['cgpa']}")
         else:
@@ -195,6 +226,7 @@ def search_student():
         result = binary_search_by_roll(roll)
         if result:
             print(f"\nFound: Roll: {result['roll']}, Name: {result['name']}, CGPA: {result['cgpa']}")
+            print("-" * 50)
         else:
             print("❌ No student found with that roll number.")
     
@@ -219,10 +251,12 @@ def assign_medals():
     sorted_students[2]['medal'] = '🥉 Bronze'
 
     print("🏅 Medals assigned to top 3 students based on CGPA!")
-
+    print("-" * 50)
 
 def show_menu():
-    print("\n📚 Student CGPA Ranking System")
+    print("\n" + "=" * 50)
+    print("🎓 Student CGPA Ranking System")
+    print("=" * 50)
     print("1. Add Student")
     print("2. Update Student")
     print("3. Delete Student")
@@ -231,12 +265,18 @@ def show_menu():
     print("6. Search Student")
     print("7. Assign Medals")
     print("8. Exit")
+    print("=" * 50)
+
 
 
 def main():
     while True:
         show_menu()
-        choice = input("Enter your choice (1–5): ")
+        choice = input("Enter your choice (1–8): ").strip()
+
+        if not choice:
+            print("❌ Please enter a choice.")
+            continue
 
         if choice == '1':
             add_student()
@@ -253,12 +293,12 @@ def main():
         elif choice == '7':
             assign_medals()
         elif choice == '8':
-            print("Goodbye!")
+            print("👋 Goodbye! Thanks for using the system.")
+            print("=" * 50)
             break
 
-
         else:
-            print("Invalid choice. Please try again.")
+            print("❌ Invalid choice. Please try again.")
 
 
 if __name__ == "__main__":
