@@ -47,6 +47,7 @@ student-cgpa-ranking-system/
 - ✅ Day 5: Added sort_students() function using Selection Sort and Merge Sort, Added view_students() to display sorted records
 - ✅ Day 6: Added search_student() using Linear (by name) and Binary (by roll) Search
 - ✅ Day 7: Assigned Gold, Silver, Bronze medals to top 3 students based on CGPA
--  ✅ Day 8: Improved input validation, added error handling, and polished the CLI with formatting, emojis, and clean messages
+- ✅ Day 8: Improved input validation, added error handling, and polished the CLI with formatting, emojis, and clean messages
+- ✅ Day 9: Added export_students() to save student data to a file
 
 ---
