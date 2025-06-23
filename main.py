@@ -253,6 +253,26 @@ def assign_medals():
     print("🏅 Medals assigned to top 3 students based on CGPA!")
     print("-" * 50)
 
+def export_students():
+    if not students:
+        print("❌ No students to export.")
+        return
+
+    filename = "students_export.txt"
+    try:
+        with open(filename, "w") as file:
+            file.write("Roll\tName\tCGPA\tMedal\n")
+            file.write("-" * 40 + "\n")
+            for s in students:
+                medal = s['medal'] if s['medal'] else "-"
+                file.write(f"{s['roll']}\t{s['name']}\t{s['cgpa']}\t{medal}\n")
+
+        print(f"✅ Student data exported to {filename}")
+        print("-" * 50)
+    except Exception as e:
+        print("❌ Error exporting data:", e)
+
+
 def show_menu():
     print("\n" + "=" * 50)
     print("🎓 Student CGPA Ranking System")
@@ -264,7 +284,8 @@ def show_menu():
     print("5. View All Students")
     print("6. Search Student")
     print("7. Assign Medals")
-    print("8. Exit")
+    print("8. Export Students to File")
+    print("9. Exit")
     print("=" * 50)
 
 
@@ -293,6 +314,8 @@ def main():
         elif choice == '7':
             assign_medals()
         elif choice == '8':
+            export_students()
+        elif choice == '9':
             print("👋 Goodbye! Thanks for using the system.")
             print("=" * 50)
             break
