@@ -51,3 +51,25 @@ student-cgpa-ranking-system/
 - ✅ Day 9: Added export_students() to save student data to a file
 
 ---
+
+## 📸 Screenshots
+
+### 🏠 Home Menu
+![Home Menu](screenshots/home_menu.png)
+
+### 🧾 Add Student
+![Add Student](screenshots/add_student.png)
+
+### 📊 Sort Students by CGPA
+![Sort Students](screenshots/sort_student.png)
+
+### 🏅 Assign Medals
+![Assign Medals](screenshots/assign_medals.png)
+
+### ✏️ Update Student
+![Update Student](screenshots/update_student.png)
+
+### 📂 Export Success
+![Export](screenshots/export_success.png)
+
+---
