@@ -94,8 +94,7 @@ def selection_sort():
                 max_idx = j
         students[i], students[max_idx] = students[max_idx], students[i]
     print("✅ Students sorted by CGPA using Selection Sort.")
-    view_students()
-    print("-" * 50)
+
 
 def merge_sort(student_list):
     if len(student_list) <= 1:
@@ -117,29 +116,6 @@ def merge(left, right):
     result.extend(left + right)
     return result
 
-def sort_students():
-    if not students:
-        print("❌ No student records to sort.")
-        return
-
-    print("\nChoose Sorting Method:")
-    print("1. Selection Sort")
-    print("2. Merge Sort")
-
-    choice = input("Enter choice (1 or 2): ")
-
-    if choice == '1':
-        selection_sort()
-    elif choice == '2':
-        sorted_list = merge_sort(students)
-        students.clear()
-        students.extend(sorted_list)
-        print("✅ Students sorted by CGPA using Merge Sort.")
-        view_students()
-        print("-" * 50)
-    else:
-        print("❌ Invalid choice.")
-
 def view_students():
     if not students:
         print("❌ No students to display.")
@@ -154,7 +130,6 @@ def view_students():
         medal_display = s['medal'] if s['medal'] else "-"
         print("{:<10} {:<20} {:<5} {:<10}".format(s['roll'], s['name'], s['cgpa'], medal_display))
     print("-" * 50)
-
 
 
 def sort_students():
@@ -238,20 +213,29 @@ def assign_medals():
         print("❌ Not enough students to assign medals (need at least 3).")
         return
 
-    # First, sort students by CGPA in descending order
-    sorted_students = sorted(students, key=lambda s: s['cgpa'], reverse=True)
-
-    # Reset medals
+    # Reset all medals
     for student in students:
         student['medal'] = None
 
-    # Assign medals to top 3
-    sorted_students[0]['medal'] = '🥇 Gold'
-    sorted_students[1]['medal'] = '🥈 Silver'
-    sorted_students[2]['medal'] = '🥉 Bronze'
+    # Sort by CGPA in descending order
+    sorted_students = sorted(students, key=lambda s: s['cgpa'], reverse=True)
+
+    medals = ['🥇 Gold', '🥈 Silver', '🥉 Bronze']
+    awarded = 0
+    seen = set()
+
+    for student in sorted_students:
+        if awarded >= 3:
+            break
+        key = (student['cgpa'], student['roll'])  # Unique by CGPA + Roll
+        if key not in seen:
+            student['medal'] = medals[awarded]
+            seen.add(key)
+            awarded += 1
 
     print("🏅 Medals assigned to top 3 students based on CGPA!")
     print("-" * 50)
+
 
 def export_students():
     if not students:
